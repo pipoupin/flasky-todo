@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <script src="script.js"></script>
+</head>
+<body>
+    <h1>Tasks</h1>
+    <button id="create-task-button">Create Task</button>
+    <div id="task-container">
+        {% for task in tasks %}
+        <div>
+            <input type="checkbox" value={{task.state}}>
+            <input type="text" value={{task.content}}>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
