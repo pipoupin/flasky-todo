@@ -14,7 +14,7 @@
             <!-- 0 = content, 1 = checked, 2 = canceled -->
             <input type="checkbox" {% if task[1] %} checked {% endif %} {% if task[2] %} disabled {% endif %}>
             <input type="text" value={{task[0]}} {% if task[2] or task[1] %} disabled {% endif %}>
-            <input type="button" value="disable" {% if task[1] %}disabled{% endif %}>
+            <input type="button" value= {% if task[2] %} enable {% else %} disable {% endif %}{% if task[1] %}disabled{% endif %}>
             <input type="button" value="delete">
         </div>
         {% endfor %}
