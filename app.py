@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request
-import db
+from db import get_from_db, load_to_db
 
 app = Flask(__name__)
 
-tasks = db.get_from_db()
+tasks = get_from_db()
+print(tasks)
 
 @app.route("/")
 def home():
@@ -16,17 +17,12 @@ def script():
 @app.route("/api", methods=["POST"])
 def api():
     global tasks
-    match request.method:
-        case "POST": # CREATE - create a task
-            tasks = request.json
-            print(tasks)
-    
+    if request.method == "POST":
+        tasks = request.json
+        load_to_db(tasks)
     return "done"
-app.run(debug=True, port=3000)
 
-db.load_to_db(tasks)
-db.close_db()
+app.run(debug=True)
 
-# TODO debug the disable enable
 # TODO sqlite3 ~ almost done
 # TODO ajouter les comptes

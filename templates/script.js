@@ -10,8 +10,6 @@ for (element of taskContainerDiv.children) {
     })
     cancelButton.addEventListener("click", () => {
         // freeze all taks's inputs except this one
-        if (checkbox.checked)
-            return
         const value = label.disabled ? false : true
         label.disabled = value
         checkbox.disabled = value
@@ -24,6 +22,7 @@ for (element of taskContainerDiv.children) {
         }
     })
     checkbox.addEventListener("change", () => {
+        // if task is checked (done) you can't change its content neither its availability (enable | disable)
         if (checkbox.checked) {
             label.disabled = true
             cancelButton.disabled = true
@@ -34,6 +33,7 @@ for (element of taskContainerDiv.children) {
         }
     })
 }
+
 setInterval(() => {
     let tasks = []
     for (element of taskContainerDiv.children) {
@@ -43,6 +43,7 @@ setInterval(() => {
         if (task[0])
             tasks.push(task)
     }
+    console.log(tasks)
     fetch("/api", {
         method: "POST",
         headers: {
@@ -86,6 +87,8 @@ createTaskButton.addEventListener("click", () => {
         const value = label.disabled ? false: true
         label.disabled = value
         checkbox.disabled = value
+
+        // swap the "enable" | "disable"
         if (cancelButton.value =="disable"){
             cancelButton.value ="enable"
         } else {
@@ -94,6 +97,7 @@ createTaskButton.addEventListener("click", () => {
     })
 
     checkbox.addEventListener("change", () => {
+        // if task is checked (done) you can't change its content neither its availability (enable | disable)
         if (checkbox.checked) {
             // as the label is empty, the task can't be checked
             if (label.value=="") {
