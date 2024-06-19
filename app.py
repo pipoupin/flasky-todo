@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request
+import db
 
 app = Flask(__name__)
 
-tasks = {}
+tasks = db.get_from_db()
 
 @app.route("/")
 def home():
@@ -19,5 +20,12 @@ def api():
         case "POST": # CREATE - create a task
             tasks = request.json
             print(tasks)
+    
     return "done"
-app.run(debug=True)
+app.run(debug=True, port=3000)
+
+db.load_to_db(tasks)
+db.close_db()
+
+# TODO sqlite3
+# TODO ajouter les comptes

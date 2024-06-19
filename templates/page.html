@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Manager</title>
-    <script src="script.js"></script>
 </head>
 <body>
     <h1>Tasks</h1>
@@ -12,10 +11,14 @@
     <div id="task-container">
         {% for task in tasks %}
         <div>
-            <input type="checkbox" value={{task.state}}>
-            <input type="text" value={{task.content}}>
+            <!-- 0 = content, 1 = checked, 2 = canceled -->
+            <input type="checkbox" {% if task[1] %} checked {% endif %} {% if task[2] %} disabled {% endif %}>
+            <input type="text" value={{task[0]}} {% if task[2] or task[1] %} disabled {% endif %}>
+            <input type="button" value="disable" {% if task[1] %}disabled{% endif %}>
+            <input type="button" value="delete">
         </div>
         {% endfor %}
     </div>
+    <script src="script.js"></script>    
 </body>
 </html>
