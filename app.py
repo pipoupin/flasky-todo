@@ -27,5 +27,6 @@ app.run(debug=True, port=3000)
 db.load_to_db(tasks)
 db.close_db()
 
-# TODO sqlite3
+# TODO debug the disable enable
+# TODO sqlite3 ~ almost done
 # TODO ajouter les comptes
