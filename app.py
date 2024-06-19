@@ -24,5 +24,5 @@ def api():
 
 app.run(debug=True)
 
-# TODO sqlite3 ~ almost done
-# TODO ajouter les comptes
+# TODO style the page
+# TODO add accounts
