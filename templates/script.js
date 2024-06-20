@@ -9,6 +9,12 @@ for (element of taskContainerDiv.children) {
         deleteButton.parentNode.remove()
     })
     cancelButton.addEventListener("click", () => {
+        if (checkbox.checked) 
+            return
+        if (label.value == "")
+            alert("Can't cancel an empty task")
+            return
+
         // freeze all taks's inputs except this one
         const value = label.disabled ? false : true
         label.disabled = value
@@ -23,7 +29,12 @@ for (element of taskContainerDiv.children) {
     })
     checkbox.addEventListener("change", () => {
         // if task is checked (done) you can't change its content neither its availability (enable | disable)
+        
         if (checkbox.checked) {
+            if (label.value == "") {
+                alert("Can't check an empty task")
+                return
+            }
             label.disabled = true
             cancelButton.disabled = true
         }
@@ -82,8 +93,12 @@ createTaskButton.addEventListener("click", () => {
 
     cancelButton.addEventListener("click", () => {
         // freeze all task's inputs except this one
-        if (checkbox.checked || label.value == "")
+        if (checkbox.checked) 
             return
+        if (label.value == "")
+            alert("Can't cancel an empty task")
+            return
+
         const value = label.disabled ? false: true
         label.disabled = value
         checkbox.disabled = value
@@ -97,16 +112,19 @@ createTaskButton.addEventListener("click", () => {
     })
 
     checkbox.addEventListener("change", () => {
+        
         // if task is checked (done) you can't change its content neither its availability (enable | disable)
         if (checkbox.checked) {
             // as the label is empty, the task can't be checked
             if (label.value=="") {
                 checkbox.checked = false 
+                alert("Can't check an empty task")
                 return
-            }
+            }    
             // if not empty, it can
             label.disabled = true
             cancelButton.disabled = true
+
         }
         else {
             label.disabled = false
