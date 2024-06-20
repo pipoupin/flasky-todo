@@ -4,7 +4,6 @@ from db import get_from_db, load_to_db
 app = Flask(__name__)
 
 tasks = get_from_db()
-print(tasks)
 
 @app.route("/")
 def home():
@@ -13,6 +12,11 @@ def home():
 @app.route("/script.js")
 def script():
     return render_template("script.js")
+
+@app.route("/style.css")
+def style():
+    print("sending css")
+    return render_template("style.css")
 
 @app.route("/api", methods=["POST"])
 def api():
