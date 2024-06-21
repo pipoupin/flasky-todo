@@ -10,15 +10,6 @@
     <div id="app">
         <input type="button" id="create-task-button" value="Create Task">
         <div id="task-container">
-            {% for task in tasks %}
-            <div class="task">
-                <!-- 0 = content, 1 = checked, 2 = canceled -->
-                <input type="checkbox" {% if task[1] %} checked {% endif %} {% if task[2] %} disabled {% endif %}>
-                <input type="text" value={{task[0]}} {% if task[2] or task[1] %} disabled {% endif %}>
-                <input type="button" class="cancel-button" value={% if task[2] %} "enable" {% else %} "disable" {% endif %}{% if task[1] %}disabled{% endif %}>
-                <input type="button" class="delete-button" value="delete">
-            </div>
-            {% endfor %}
         </div>
     </div>
     <style>
@@ -57,6 +48,7 @@
             flex-direction: column;
             gap: 5px;
         }
+
         h1{
             margin :5px;
         }
@@ -65,12 +57,30 @@
             display: flex;
             align-items: space-around;
             gap: 5px;
-            width: 160%;
+            width: 180%;
             overflow: visible;
         }
 
         .task:hover > input[type="button"] {
             display: inline-block;
+        }
+
+        .modif-button {
+            /*
+            display: none;
+            background-color: white; 
+            border-radius: 2px;
+            color: black; 
+            border: 2px solid #381c81;
+            transition-duration: 0.4s;
+            */
+        }
+
+        .modif-button:hover {
+            /*
+            background-color: #333138;
+            color: white;
+            */
         }
 
         .cancel-button {
@@ -95,6 +105,7 @@
             border: 2px solid #FF312E;
             transition-duration: 0.4s;
         }
+
         .delete-button:hover {
             background-color: #FF312E;  
             color: white;
