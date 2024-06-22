@@ -37,7 +37,7 @@
     overflow: visible;
 }
 
-.cancel-button, .delete-button {
+.cancel-button, .delete-button, .modify-button {
     border-radius: 2px;
     border: 2px solid;
     transition-duration: 200ms;
@@ -46,7 +46,8 @@
 }
 
 .task:hover > .cancel-button,
-.task:hover > .delete-button {
+.task:hover > .delete-button,
+.task:hover > .modify-button {
     visibility: visible;
     opacity: 1;
 }
@@ -75,5 +76,12 @@
 }
 
 .modify-button {
-    
+    border-color: #3DDC97;
+    color: black;
+    background-color: white;
+}
+
+.modify-button:hover {
+    background-color: #3DDC97;
+    color: white;
 }
