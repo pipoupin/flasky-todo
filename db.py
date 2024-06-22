@@ -18,48 +18,56 @@ def create_table():
 def valid_task_id(task):
     conn = connect()
     cursor = conn.cursor()
+
     cursor.execute("SELECT tasks WHERE id = ?", task[0])
     response = bool(cursor.fetchall())
+
     conn.close()
     return response
 
 
-def update_tasks(tasks):
+def update_task(task):
     conn = connect()
     cursor = conn.cursor()
-    cursor.executemany("""UPDATE tasks SET content = ?, checked = ?, canceled = ? WHERE id = ?""", ((task[1], task[2], task[3], task[0]) for task in tasks))
-    conn.commit()
+
+    if task[0]:
+        cursor.execute("UPDATE tasks SET content = ?, checked = ?, canceled = ? WHERE id = ?", (task[1], task[2], task[3], task[0]))
+        conn.commit()
+    
     conn.close()
 
-def create_tasks(tasks):
+def create_task(task):
     conn = connect()
     cursor = conn.cursor()
-    cursor.executemany("""INSERT INTO tasks (content, checked, canceled)
-                     VALUES (?,?,?)""", ((task[1], task[2], task[3]) for task in tasks))
-    ids = []
-    for task in tasks:
-        cursor.execute("SELECT id FROM tasks WHERE content = ?", (task[1],))
-        row = cursor.fetchone()
-        if row:
-            ids.append(row[0])
-    response = cursor.fetchall()
-    conn.commit()
+    print(task)
+
+    if int(task[0]) == 0:
+        cursor.execute("INSERT INTO tasks (content, checked, canceled) VALUES (?,?,?)", task[1:4])
+        id = cursor.lastrowid
+        conn.commit()
+    else:
+        print('hmm')
+        id = 0
+
     conn.close()
-    return ids
+    return id
 
 def get_tasks(username=None):
     conn = connect()
     cursor = conn.cursor()
-    cursor.execute("""SELECT * FROM tasks ORDER BY id ASC""")
+
+    cursor.execute("SELECT * FROM tasks ORDER BY id ASC")
     response = cursor.fetchall()
+
     conn.close()
     return response
 
-def delete_tasks(tasks):
-    print(tasks )
+def delete_task(task):
     conn = connect()
     cursor = conn.cursor()
-    cursor.executemany("""DELETE FROM tasks WHERE id=?""",((task[0],) for task in tasks))
+
+    cursor.execute("DELETE FROM tasks WHERE id=?", (task[0],))
+
     conn.commit()
     conn.close()
 

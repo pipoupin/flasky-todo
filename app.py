@@ -19,28 +19,20 @@ def api():
     global tasks
     match request.method:
         case "POST":
-            data = request.json
-            print(data)
-            updates = [ task for task in data if task[0] ]
-            creates = [task for task in data if task[0] == False]
-
-            
-            response = db.create_tasks(creates)
-            db.update_tasks(updates)
-            return response
+            id = db.create_task(request.json)
+            return json.dumps({"id": id})
         case "GET":
             tasks = db.get_tasks()
             return json.dumps(tasks)
         case "PUT":
-            db.update_tasks(request.json) # request.json["tasks"] when we'll have accounts done
-            return "done"
+            db.update_task(request.json)
+            return json.dumps("done")
         case "DELETE":
-            db.delete_tasks(request.json) # request.json["tasks"]
-            return "done"
+            db.delete_task(request.json)
+            return json.dumps("done")
 
 
 app.run(debug=True)
 
-# TODO fix the issues caused by the recent implementation of CRUD
 # TODO add styling
 # TODO add accounts

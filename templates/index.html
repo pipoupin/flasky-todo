@@ -61,30 +61,21 @@
             overflow: visible;
         }
 
-        .task:hover > input[type="button"] {
-            display: inline-block;
-        }
-
-        .modif-button {
-            /*
-            display: none;
-            background-color: white; 
-            border-radius: 2px;
-            color: black; 
-            border: 2px solid #381c81;
+        .task > input[type="button"] {
             transition-duration: 0.4s;
-            */
+            visibility: hidden;
+            opacity: 0;
         }
-
-        .modif-button:hover {
-            /*
-            background-color: #333138;
-            color: white;
-            */
+        .task > input.modify-button {
+            visibility: visible;
+            opacity: 1;
+        }
+        .task:hover > input[type="button"] {
+            visibility: visible;
+            opacity: 1;
         }
 
         .cancel-button {
-            display: none;
             background-color: white; 
             border-radius: 2px;
             color: black; 
@@ -98,7 +89,7 @@
         }
 
         .delete-button {
-            display: none;
+            opacity: 0;
             border-radius: 2px;
             background-color: white; 
             color: black; 
@@ -110,6 +101,8 @@
             background-color: #FF312E;  
             color: white;
         }
+
+
     </style>
     <script src="index.js"></script> 
 </body>
