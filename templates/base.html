@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock title %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css')}}">
+    {% block styles %} {% endblock styles %}
+</head>
+<body>
+    <header>
+        <h1>Tasks</h1>
+        <div id="auth-buttons-container">
+            {% block auth_buttons %} {% endblock auth_buttons %}
+        </div>
+    </header>
+    
+    <main>
+        {% block content %} {% endblock content %}
+    </main>
+    
+    <footer>
+        <p>© Michel • Iskandar	• Toca</p>
+    </footer>
+    {% block scripts %} {% endblock scripts %}
+</body>
+</html>

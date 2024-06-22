@@ -4,11 +4,13 @@ import json
 
 app = Flask(__name__)
 
-tasks = []
-
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template("home.html")
+
+@app.route("/app")
+def _app(): # function name app causes error
+    return render_template("app.html")
 
 @app.route("/index.js")
 def script():
@@ -16,7 +18,6 @@ def script():
 
 @app.route("/api", methods=["POST", "GET", "PUT", "DELETE"])
 def api():
-    global tasks
     match request.method:
         case "POST":
             id = db.create_task(request.json)

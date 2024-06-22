@@ -6,7 +6,7 @@ const performRequest = async (url, method, body) => {
     if (body)
     {
         opts.headers = { 'Content-Type': 'application/json' };
-        opts.body = body;
+        opts.body = JSON.stringify(body);
     }
     
     return fetch(url, opts)
@@ -24,15 +24,15 @@ const getTasksRequest = () => {
 }
 
 const deleteTaskRequest = (task) => {
-    return performRequest('/api', 'DELETE', JSON.stringify(task));
+    return performRequest('/api', 'DELETE', task);
 }
 
 const updateTaskRequest = (task) => { 
-    return performRequest('/api', 'PUT', JSON.stringify(task));
+    return performRequest('/api', 'PUT', task);
 }
 
 const createTaskRequest = (task) => {
-    return performRequest('/api', 'POST', JSON.stringify(task));
+    return performRequest('/api', 'POST', task);
 }
 
 const setAttr = (attr, value, ...elements) => {
@@ -63,7 +63,7 @@ const createTask = (task) => {
     label.type = 'text';
     label.value = task[1];
     label.placeholder = 'fill';
-    label.disabled = task[3];
+    label.disabled = task[2] || task[3]; // if task is checked or disabled
     label.readOnly = !task[4];
 
     cancelButton.type = 'button';
@@ -76,9 +76,9 @@ const createTask = (task) => {
     deleteButton.classList.add('delete-button');
 
     modifyButton.type = 'button';
-    modifyButton.value = 'save';
-    modifyButton.disabled = task[2];
-    modifyButton.classList.add('modify-button')
+    modifyButton.value = task[4] ? 'save' : 'modify';
+    modifyButton.disabled = task[2] || task[3]; // if task is checked or disabled
+    modifyButton.classList.add('modify-button');
 
     taskDiv.append(checkbox, label, modifyButton, cancelButton, deleteButton);
     taskContainerDiv.appendChild(taskDiv);
@@ -213,7 +213,8 @@ const createTask = (task) => {
     });
 }
 
-getTasksRequest().then(response => {
+getTasksRequest()
+.then(response => {
     tasks = response;
     tasks.forEach(task => {
         task.push(false);

@@ -1,0 +1,52 @@
+html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+h1 {
+    margin: 5px;
+    display: flex;
+}
+
+#auth-buttons-container {
+    position: fixed;
+    right: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+main {
+    width: inherit;
+    height: inherit;
+    position: relative;
+}
+
+footer {
+    background-color: rgb(220, 230, 244);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+}
